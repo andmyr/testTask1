@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AttTest1</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Type name…</string>
+    <string name="avatar">Avatar</string>
+    <string name="nav_header_title">Andrii Mushta</string>
+    <string name="nav_header_subtitle">andmyr@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="item4">item4</string>
+    <string name="item5">item5</string>
+    <string name="item1">item1</string>
+    <string name="item2">item2</string>
+    <string name="item3">item3</string>
+    <string name="description">description</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="textview">TextView</string>
+    <string name="general">General</string>
+    <string name="other">Other</string>
+</resources>
