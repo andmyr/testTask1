@@ -7,7 +7,6 @@ import and.od.ua.atttest1.Constants.SHOW_VP
 import and.od.ua.atttest1.Constants.TAG_1
 import and.od.ua.atttest1.Constants.TAG_2
 import and.od.ua.atttest1.Constants.URL
-import and.od.ua.atttest1.repository.ImageController
 import and.od.ua.atttest1.repository.RequestTask
 import and.od.ua.atttest1.ui.description.ViewPagerFragment
 import and.od.ua.atttest1.ui.list.RecyclerViewFragment
@@ -54,35 +53,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        isDrawerFixed = resources.getBoolean(R.bool.isDrawerFixed)
-
-        drawerLayout = findViewById(R.id.activity_main)
-        actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close)
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-
-        if (isDrawerFixed) {
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
-            drawerLayout.setScrimColor(Color.TRANSPARENT)
-        }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        nav_view.setNavigationItemSelectedListener(object :
-            NavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.nav_home -> {
-                        vpOnScreen = false
-                        vpCurrentItemI = ""
-                        showHomeFragment()
-                    }
-                    else -> return true
-                }
-                return true
-            }
-        })
+        initDrawer()
 
         if (Utils.verifyStoragePermissions(this)) {
             startApp()
@@ -228,6 +199,38 @@ class MainActivity : AppCompatActivity() {
         searchView?.visibility = View.VISIBLE
     }
 
+    private fun initDrawer() {
+        isDrawerFixed = resources.getBoolean(R.bool.isDrawerFixed)
+
+        drawerLayout = findViewById(R.id.activity_main)
+        actionBarDrawerToggle =
+            ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close)
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        if (isDrawerFixed) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
+            drawerLayout.setScrimColor(Color.TRANSPARENT)
+        }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        nav_view.setNavigationItemSelectedListener(object :
+            NavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.nav_home -> {
+                        vpOnScreen = false
+                        vpCurrentItemI = ""
+                        showHomeFragment()
+                    }
+                    else -> return true
+                }
+                return true
+            }
+        })
+    }
+
     private fun closeSearchView(): Boolean {
         if (searchView != null
             && searchView?.isIconified == false
@@ -239,7 +242,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startApp() {
-        ImageController.init(this)
         recyclerViewFragment = RecyclerViewFragment()
         vpFragment = ViewPagerFragment()
         showHomeFragment()

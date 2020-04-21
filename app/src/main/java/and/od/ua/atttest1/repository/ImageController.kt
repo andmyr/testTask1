@@ -3,18 +3,16 @@ package and.od.ua.atttest1.repository
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-
 import android.widget.ImageView
 
 object ImageController {
 
     private var fileCache: FileCache? = null
 
-    fun init(context: Context) {
-        fileCache = FileCache(context)
-    }
-
     fun downloadImage(url: String, imageView: ImageView) {
+        if (fileCache == null) {
+            fileCache = FileCache(imageView.context)
+        }
         val file = fileCache?.getFile(url)
         file?.run {
             if (exists() && isFile) {
@@ -28,7 +26,10 @@ object ImageController {
         }
     }
 
-    fun saveBitmapToCache(url: String, bitmap: Bitmap) {
+    fun saveBitmapToCache(url: String, bitmap: Bitmap, context: Context) {
+        if (fileCache == null) {
+            fileCache = FileCache(context)
+        }
         fileCache?.saveFile(url, bitmap)
     }
 }

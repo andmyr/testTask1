@@ -28,7 +28,7 @@ class ImageDownloaderTask(imageView: ImageView, private val url: String) :
             if (imageView != null) {
                 if (bitmap != null) {
                     imageView.setImageBitmap(bitmap)
-                    ImageController.saveBitmapToCache(url, bitmap)
+                    ImageController.saveBitmapToCache(url, bitmap, imageView.context)
                 }
             }
         }
